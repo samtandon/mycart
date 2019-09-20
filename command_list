@@ -1,0 +1,231 @@
+    1  pwd
+    2  ls
+    3  sudo apt-get -y install docker
+    4  sudo systemctl start docker
+    5  sudo systemctl enable docker
+    6  sudo systemctl status docker
+    7  sudo usermod -a -G docker ubuntu
+    8  id -a
+    9  docker ps
+   10  docker info
+   11  docker pull httpd:2.4
+   12  docker images
+   13  sudo
+   14  sudo cd /var/lib
+   15  cd /var/lib/
+   16  ls
+   17  cd docker/image/
+   18  ls
+   19  cd ../images
+   20  owd
+   21  pwd
+   22  cd ..
+   23  ls
+   24  ls image/overlay2/
+   25  docker run --name testapache -d -p 9000:80 httpd:2.4
+   26  docker ps
+   27  curl http://localhost:8080
+   28  curl http://localhost:9000
+   29  docker stop testapache
+   30  docker ps
+   31  docker ps -a
+   32  docker ispect
+   33  docker inspect testapache
+   34  docker start testapache
+   35  docker inspect testapache
+   36  ps -eaf|grep 18679
+   37  docker top testapache
+   38  ps -eaf|grep 18651
+   39  cd /proc/18679
+   40  ls
+   41  cd ns
+   42  ls
+   43  ls -la
+   44  exit
+   45  sudo bash
+   46  whoami
+   47  exit
+   48  sudo bash
+   49  docker build -t samtandon/mycart-frontend-1209:1.0 mycart/frontend/
+   50  docker images
+   51  docker run -d -P samtandon/mycart-frontend-1209:1.0
+   52  docker ps
+   53  curl http://localhost:32768
+   54  docker stop samtandon/mycart-frontend-1209:1.0
+   55  docker ps -a
+   56  docker stop flamboyant_khorana
+   57  docker rm flamboyant_khorana
+   58  docker stop flamboyant_khorana
+   59  docker build -t samtandon/mycart-frontend-1209:1.0 mycart/frontend/
+   60  docker build -t samtandon/mycart-frontend-1209:1.0 mycart/frontend/
+   61  docker images
+   62  docker run -d -P samtandon/mycart-frontend-1209:1.0
+   63  docker ps
+   64  curl http://localhost:32769
+   65  docker history
+   66  docker ps
+   67  docker ps -a
+   68  docker build -t samtandon/mycart-frontend-1209:1.0 mycart/frontend/
+   69  docker history
+   70  docker history samtandon/mycart-frontend-1209:1.0
+   71  docker inspect samtandon/mycart-frontend-1209:1.0
+   72  docker network ls
+   73  docker inspect bridge
+   74  docker network create --driver bridge --subnet 10.1.0.0/16 --gateway 10.1.0.1 testnw
+   75  docker network ls
+   76  docker inspect testnw
+   77  ifconfig
+   78  ifconfig -a
+   79  docker images
+   80  docker ps -a
+   81  docker run -d -p 9000:80 --name mycart-frontend --net testnw samtandon/mycart-frontend-1209:1.0
+   82  docker ps -1
+   83  docker ps -a
+   84  docker inspect testnw
+   85  docker inspect mycart-frontend
+   86  docker run -d -p --name mycart-backend --net testnw samtandon/mycart-frontend-1209:1.0
+   87  docker run -d --name mycart-backend --net testnw samtandon/mycart-frontend-1209:1.0
+   88  docker ps -a
+   89  docker exec mycart-frontend cat /etc/hosts
+   90  docker exec -it mycart-frontend cat /etc/hosts
+   91  docker exec -it mycart-frontend /bin/bash
+   92  docker ps -a
+   93  docker stop mycart-frontend mycart-frontend; docker rm mycart-backend mycart-frontend
+   94  docker ps -a
+   95  docker stop mycart-backend
+   96  docker rm mycart-backend
+   97  ps -a
+   98  docker ps -q
+   99  docker ps -a
+  100  docker run -d --name mycart-backend samtandon/mycart-frontend-1209:1.0
+  101  docker run -d -p 9000:80 --name mycart-frontend samtandon/mycart-frontend-1209:1.0
+  102  docker exec -it mycart-frontend /bin/bash
+  103  docker stop mycart-frontend; docker rm mycart-frontend
+  104  docker run -d -p 9000:80 --name mycart-frontend --link mycart-backend samtandon/mycart-frontend-1209:1.0
+  105  docker exec -it mycart-frontend /bin/bash
+  106  docker ps -a
+  107  docker stop mycart-frontend mycart-backend; docker rm mycart-frontend mycart-backend
+  108  docker ps -a
+  109  docker run -d -p 9000:80 --name mycart-frontend -v mycart-frontend-logvol:/var/log -v /home/ubuntu:/home/ubuntu samtandon/mycart-frontend-1209:1.0
+  110  docker vol ls
+  111  docker volume ls
+  112  docker inspect mycart-frontend-logvol
+  113  sudo ls -la /var/lib/docker/volumes/mycart-frontend-logvol/_data
+  114  docker ps
+  115  docker inspect mycart-frontend
+  116  docker ps
+  117  docker exec -it mycart-frontend /bin/bash
+  118  cd mycart/
+  119  git clone https://github.com/mohanraz81/awslogs
+  120  rm -rf awslogs/.git/
+  121  cd ..
+  122  pwd
+  123  ls -a
+  124  ls -a ./
+  125  ls -a /
+  126  rm -rf ~/.aws
+  127  docker images
+  128  docker images | grep lambda
+  129  docker rmi 50dafa7488c4 f81d6f78b2ff 546cfb23364f 62cc52d59225 84e9cc454dd9
+  130  docker build -t samtandon/mycart-frontend-logagent:1.0 mycart/awslogs/
+  131  docker run -d --name mycart-frontend-logagent -v mycart-frontend-logvol:/mnt/log:ro samtandon/mycart-frontend-logagent1:0
+  132  docker run -d --name mycart-frontend-logagent -v mycart-frontend-logvol:/mnt/log:ro samtandon/mycart-frontend-logagent:1.0
+  133  docker ps
+  134  curl http://localhost:9000
+  135  curl http://localhost:9000
+  136  curl http://localhost:9000
+  137  curl http://localhost:9000
+  138  docker ps -a
+  139  docker login
+  140  docker ps -a
+  141  docker tag samtandon/mycart-frontend-1209:1.0 samtandon/mycart-frontend-1209:latest
+  142  docker push samtandon/mycart-frontend-1209:latest 
+  143  docker push samtandon/mycart-frontend-1209
+  144  docker ps -a
+  145  docker push samtandon/mycart-frontend-logagent
+  146  cd ..
+  147  cd environment/
+  148  git clone https://github.com/mohanraz81/myapp1808
+  149  sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  150  sudo chmod +x /usr/local/bin/docker-compose
+  151  docker-compose
+  152  cd myapp1808/
+  153  docker-compose up -d
+  154  docker ps -a
+  155  docker-compose down
+  156  docker ps -a
+  157  docker stop mycart-frontend-logagent
+  158  docker stop mycart-frontend
+  159  docker stop compassionate_hertz
+  160  docker stop estapache
+  161  docker stop testapache
+  162  docker rm mycart-frontend-logagent mycart-frontend compassionate_hertz testapache
+  163  docker ps -a
+  164  docker-compose up -d
+  165  docker ps -a
+  166  docker network ls
+  167  curl http://localhost:9000
+  168  docker-compose push
+  169  docker-compose down
+  170  pip install awscli --upgrade --user
+  171  curl -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.13.7/2019-06-11/bin/linux/amd64/aws-iam-authenticator
+  172  chmod +x ./aws-iam-authenticator
+  173  $HOME/bin/aws-iam-authenticator
+  174  mkdir -p $HOME/bin && cp ./aws-iam-authenticator 
+  175  mkdir -p $HOME/bin
+  176  cp ./aws-iam-authenticator
+  177  cp ./aws-iam-authenticator .
+  178  $HOME/bin/aws-iam-authenticator
+  179  cp ./aws-iam-authenticator $HOME/bin/aws-iam-authenticator
+  180  export PATH=$HOME/bin:$PATH
+  181  echo 'export PATH=$HOME/bin:$PATH' >> ~/.bashrc
+  182  aws-iam-authenticator help
+  183  curl --silent --location "https://github.com/weaveworks/eksctl/releases/download/latest_release/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+  184  sudo mv /tmp/eksctl /usr/local/bin
+  185  eksctl version
+  186  curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+  187  chmod +x ./kubectl
+  188  sudo mv ./kubectl /usr/local/bin/kubectl
+  189  kubectl version
+  190  eksctl create cluster --region us-east-1 --name prod --version 1.13 --nodegroup-name standard-workers --node-type t3.small --zones=us-east-1a,us-east-1b,us-east-1c --nodes 3 --nodes-min 3 --nodes-max 3 --node-ami auto --appmesh-access
+  191  $ eksctl delete cluster --region us-east-1 --name prod
+  192  eksctl delete cluster --region us-east-1 --name prod
+  193  eksctl create cluster --region us-east-1 --name prod --version 1.13 --nodegroup-name standard-workers --node-type t3.small --zones=us-east-1a,us-east-1b,us-east-1c --nodes 3 --nodes-min 3 --nodes-max 3 --node-ami auto --appmesh-access
+  194  kubectl get nodes
+  195  cat ~/.kube/config
+  196  kubectl apply -f
+  197  kubectl create namespace mycart
+  198  kubectl apply -f deply/frontend/
+  199  kubectl apply -f deploy/frontend/
+  200  kubectl get deploy -n mycart
+  201  kubectl get rs -n mycart
+  202  kubectl get pods -n mycart
+  203  kubectl get services -n mycart
+  204  eksctl delete cluster --region us-east-1 --name prod
+  205  history
+  206  history
+  207  git clone https://github.com/samtandon/mycart
+  208  git push
+  209  cd mycart
+  210  git push
+  211  ls
+  212  git remote add origin https://github.com/samtandon/mycart.git
+  213  git push -u origin master
+  214  git push origin master -f
+  215  history
+  216  git clone https://github.com/samtandon/mycart.git 
+  217  cd mycart
+  218  git push
+  219  git push -f
+  220  git commit
+  221  git push
+  222  git push -f
+  223  git push -u origin master
+  224  git commit -m "commit"
+  225  git add README.md 
+  226  git add awslogs/
+  227  git add frontend/
+  228  git commit -m "commit"
+  229  git push
+  230  history
+  231  history > command_list
